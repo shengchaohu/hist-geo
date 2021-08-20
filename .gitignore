@@ -1,0 +1,90 @@
+# Ignore everything
+*
+
+# Except .gitignore
+!.gitignore
+
+# Except python
+!*.py
+!*.pyi
+
+# Except pylintrc
+!*.pylintrc
+
+# Except json
+!*.json
+
+# Except conf
+!*.conf
+
+# Except yaml
+!*.yaml
+
+# Except toml
+!*.toml
+
+# Except .sh
+!*.sh
+
+# Except .avro
+!*.avro
+
+# Except .sql
+!*.sql
+
+# Except setup.cfg
+!setup.cfg
+
+# Except Docker
+!.dockerignore
+!Dockerfile
+
+# Except Jenkinsfile
+!Jenkinsfile
+
+# Except PlantUML
+!*.plantuml
+
+# Except markdown
+!*.md
+
+# Except directories
+!*/
+
+# Ignore mypy cache
+.mypy_cache/
+.dmypy.json
+
+# Ignore pytest_cache
+.pytest_cache/
+
+# Ignore egg-info
+*.egg-info/
+
+# ignore ropeproject
+.ropeproject/
+
+# ignore htmlcov
+htmlcov/
+
+# Except hooks
+!.hooks/*
+
+# Except documentation
+!*.rst
+!docs/_static/css/custom.css
+
+# Except PEP 561 typing
+!py.typed
+
+# Ignore build and dist
+build/
+dist/
+
+# Ignore idea
+.idea/
+
+# Ignore vscode
+.vscode/
+
+# Package specific:
