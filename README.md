@@ -24,8 +24,8 @@ We use [conda](https://conda.io/) as a package and environment manager.
 6. List available tasks.
 
 ```sh
-$ conda create -n his-geo-backend python=3.8.10 invoke --yes
-$ conda activate his-geo-backend
+$ conda create -n backend python=3.8.10 invoke --yes
+$ conda activate backend
 $ invoke bootstrap develop hooks
 $ invoke --list
 ```

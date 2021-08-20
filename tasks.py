@@ -1,15 +1,10 @@
-import glob
-import hashlib
-import json
-import mimetypes
-import os
 import shlex
 from pathlib import Path
 from platform import python_version
 
 import invoke  # http://www.pyinvoke.org/
 
-PACKAGE = "his-geo-backend"
+PACKAGE = "backend"
 CONDA_OUTPUT = "build/conda"
 DOCS_OUTPUT = "build/docs"
 
@@ -46,6 +41,33 @@ def bootstrap(ctx, python=python_version()):
     ensure_packages(*develop_packages, *build_packages, *run_packages)
 
 
+@invoke.task
+def hooks(ctx, uninstall_=False):
+    """Install (or uninstall) git hooks."""
+
+    def install_hooks():
+        invoke_path = Path(ctx.run("which invoke", hide=True).stdout[:-1])
+        for src_path in Path(".hooks").iterdir():
+            dst_path = Path(".git/hooks") / src_path.name
+            print(f"Installing: {dst_path}")
+            with open(str(src_path), "r") as f:
+                src_data = f.read()
+            with open(str(dst_path), "w") as f:
+                f.write(src_data.format(invoke_path=invoke_path.parent))
+            ctx.run(f"chmod +x {dst_path}")
+
+    def uninstall_hooks():
+        for path in Path(".git/hooks").iterdir():
+            if not path.suffix:
+                print(f"Uninstalling: {path}")
+                path.unlink()
+
+    if uninstall_:
+        uninstall_hooks()
+    else:
+        install_hooks()
+
+
 @invoke.task(help={"all": f"Remove {PACKAGE}.egg-info directory too", "n": "Dry-run mode"})
 def clean(ctx, all_=False, n=False):
     """Clean unused files."""
@@ -54,6 +76,7 @@ def clean(ctx, all_=False, n=False):
         args.append(f"-e {PACKAGE}.egg-info")
     args.append("-n" if n else "-f")
     ctx.run("git clean " + " ".join(args), echo=True)
+
 
 @invoke.task(
     help={

@@ -4,8 +4,8 @@ import re
 
 import setuptools
 
-PACKAGE_NAME = "his-geo-backend"
-DESCRIPTION = "his-geo-backend"
+PACKAGE_NAME = "backend"
+DESCRIPTION = "backend"
 
 
 def get_version(package_name):
@@ -20,7 +20,5 @@ setuptools.setup(
     package_data={PACKAGE_NAME: ["py.typed"]},
     packages=setuptools.find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     description=DESCRIPTION,
-    entry_points={
-        "console_scripts": ["his-geo-backend = his-geo-backend.__main__:entry_point"]
-    },
+    entry_points={"console_scripts": ["backend = backend.__main__:entry_point"]},
 )

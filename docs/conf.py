@@ -1,4 +1,4 @@
-project = "his-geo-backend"
+project = "backend"
 copyright = "Akuna Capital LLC"
 author = "Akuna Capital LLC"
 

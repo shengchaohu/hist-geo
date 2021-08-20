@@ -1,5 +1,3 @@
-from typing import Dict, Tuple
-
 import db
 
 
@@ -28,27 +26,21 @@ class AddressLoader:
             # ignore those without coordinates
             if not x_co or not y_co:
                 continue
-            for year in range(r[5],r[6]+1):
+            for year in range(r[5], r[6] + 1):
                 if year not in address:
                     address[year] = {}
                 if r[0] in address[year]:
                     continue
                 else:
-                    address[year][addr_id] = (admin_type, name_chn, x_co, y_co, belongs1_name, belongs2_name, belongs3_name ,belongs4_name, belongs5_name)
+                    address[year][addr_id] = (
+                        admin_type,
+                        name_chn,
+                        x_co,
+                        y_co,
+                        belongs1_name,
+                        belongs2_name,
+                        belongs3_name,
+                        belongs4_name,
+                        belongs5_name,
+                    )
         return address
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
