@@ -19,7 +19,7 @@ class AdministrativeDivionAdaptor(GeoJsonAdaptor):
     template_point = {
         "type": "Feature",
         "geometry": {"type": "Point", "coordinates": []},
-        "properties": {"description": "", "ch_name": "", "admin_type": ""},
+        "properties": {"description": "", "id": "", "ch_name": "", "admin_type": ""},
     }
 
     def dict_to_geo_json(self, data):
@@ -47,12 +47,13 @@ class MingAdaptor(AdministrativeDivionAdaptor):
         data of format {id: {admin_type, chinese_name, x, y, ...},}
         """
         geo_json = copy.deepcopy(self.template_geo_json)
-        for k, v in data.items():
+        for addr_id, v in data.items():
             point = copy.deepcopy(self.template_point)
+            point["properties"]["id"] = addr_id
             point["properties"]["admin_type"] = v[0]
             point["properties"]["ch_name"] = v[1]
             point["geometry"]["coordinates"] = [v[2], v[3]]
-            description = ""
+            description = f"{v[1]}-"
             for i in range(4, 9):
                 if v[i]:
                     description += f"{v[i]}-"
